@@ -1,0 +1,35 @@
+<h1>Listing founders</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Company</th>
+    <th>About</th>
+    <th>Looking for</th>
+    <th>Contact email</th>
+    <th>Contact phone</th>
+    <th>Contact linked in</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @founders.each do |founder| %>
+  <tr>
+    <td><%= founder.name %></td>
+    <td><%= founder.company %></td>
+    <td><%= founder.about %></td>
+    <td><%= founder.looking_for %></td>
+    <td><%= founder.contact_email %></td>
+    <td><%= founder.contact_phone %></td>
+    <td><%= founder.contact_linked_in %></td>
+    <td><%= link_to 'Show', founder %></td>
+    <td><%= link_to 'Edit', edit_founder_path(founder) %></td>
+    <td><%= link_to 'Destroy', founder, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Founder', new_founder_path %>

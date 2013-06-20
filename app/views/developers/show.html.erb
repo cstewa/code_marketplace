@@ -1,0 +1,40 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @developer.name %>
+</p>
+
+<p>
+  <b>About:</b>
+  <%= @developer.about %>
+</p>
+
+<p>
+  <b>Looking for:</b>
+  <%= @developer.looking_for %>
+</p>
+
+<p>
+  <b>Price:</b>
+  <%= @developer.price %>
+</p>
+
+<p>
+  <b>Git link:</b>
+  <%= @developer.git_link %>
+</p>
+
+<p>
+  <b>Contact email:</b>
+  <%= @developer.contact_email %>
+</p>
+
+<p>
+  <b>Contact phone:</b>
+  <%= @developer.contact_phone %>
+</p>
+
+
+<%= link_to 'Edit', edit_developer_path(@developer) %> |
+<%= link_to 'Back', developers_path %>

@@ -1,0 +1,40 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @founder.name %>
+</p>
+
+<p>
+  <b>Company:</b>
+  <%= @founder.company %>
+</p>
+
+<p>
+  <b>About:</b>
+  <%= @founder.about %>
+</p>
+
+<p>
+  <b>Looking for:</b>
+  <%= @founder.looking_for %>
+</p>
+
+<p>
+  <b>Contact email:</b>
+  <%= @founder.contact_email %>
+</p>
+
+<p>
+  <b>Contact phone:</b>
+  <%= @founder.contact_phone %>
+</p>
+
+<p>
+  <b>Contact linked in:</b>
+  <%= @founder.contact_linked_in %>
+</p>
+
+
+<%= link_to 'Edit', edit_founder_path(@founder) %> |
+<%= link_to 'Back', founders_path %>
