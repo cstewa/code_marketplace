@@ -52,6 +52,7 @@ class DevelopersController < ApplicationController
         @developer.languages << @language2
         @language3 = Language.find_or_create_by_name(params[:language_name3])
         @developer.languages << @language3
+        session[:user_name] = @developer.name
         format.html { redirect_to @developer, notice: "Woo! You're an official user." }
         format.json { render json: @developer, status: :created, location: @developer }
       else

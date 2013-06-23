@@ -18,7 +18,6 @@ class FoundersController < ApplicationController
       @projects = @founder.projects.map { |project| project.name }
 
     end
-
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @founder }
@@ -48,6 +47,7 @@ class FoundersController < ApplicationController
 
     respond_to do |format|
       if @founder.save
+        session[:user_name] = @founder.name
         format.html { redirect_to @founder, notice: "Woo! You're an official user." }
         format.json { render json: @founder, status: :created, location: @founder }
       else

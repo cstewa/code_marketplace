@@ -1,7 +1,9 @@
 <p id="notice"><%= notice %></p>
 
+
 <!-- if founder show this:-->
 <h1> My Profile </h1> <%= link_to 'Edit Profile', edit_founder_path(@founder) %> 
+
 
 <!-- Make this go further down with CSS -->
 <h1> <%= @founder.name %> </h1>
@@ -19,7 +21,7 @@
 </p>
 
 <p>
-  <b>Looking for:</b>
+  <b>Looking for a developer who:</b>
   <%= @founder.looking_for %>
 </p>
 

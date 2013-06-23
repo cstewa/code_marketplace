@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130621070619) do
+ActiveRecord::Schema.define(:version => 20130623053300) do
 
   create_table "developers", :force => true do |t|
     t.string   "name"
@@ -22,8 +22,10 @@ ActiveRecord::Schema.define(:version => 20130621070619) do
     t.string   "contact_email"
     t.integer  "contact_phone"
     t.string   "photo_url"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+    t.string   "email"
+    t.string   "password_digest"
   end
 
   create_table "developers_languages", :force => true do |t|
@@ -47,6 +49,8 @@ ActiveRecord::Schema.define(:version => 20130621070619) do
     t.string   "photo_url"
     t.datetime "created_at",        :null => false
     t.datetime "updated_at",        :null => false
+    t.string   "email"
+    t.string   "password_digest"
   end
 
   create_table "languages", :force => true do |t|
@@ -58,6 +62,20 @@ ActiveRecord::Schema.define(:version => 20130621070619) do
   create_table "languages_projects", :force => true do |t|
     t.integer "language_id"
     t.integer "project_id"
+  end
+
+  create_table "pending_developers", :force => true do |t|
+    t.string   "name"
+    t.integer  "project_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "pending_projects", :force => true do |t|
+    t.string   "name"
+    t.integer  "developer_id"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
   end
 
   create_table "projects", :force => true do |t|

@@ -1,4 +1,12 @@
 Codeideas::Application.routes.draw do
+  get "sessions/new"
+
+  get "sessions/show"
+
+  post "sessions/create"
+
+  delete "sessions/destroy"
+
   resources :developers
 
 

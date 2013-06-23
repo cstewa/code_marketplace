@@ -8,6 +8,19 @@
 </head>
 <body>
 
+<% if current_founder %>
+	Logged in as: <%= current_founder.name %> 
+	<%= link_to "Log out", sessions_destroy_path, :method => "delete" %> 
+<% elsif current_developer %>
+	Logged in as: <%= current_developer.name %> 
+	<%= link_to "Log out", sessions_destroy_path, :method => "delete" %> 
+<% else %>
+	<%= link_to "Sign up as a Founder", new_founder_path %> |
+	<%= link_to "Sign up as a Developer", new_developer_path %> |
+	<%= link_to "Log in", sessions_new_path %> 
+<% end %> 
+
+
 <%= yield %>
 
 </body>
