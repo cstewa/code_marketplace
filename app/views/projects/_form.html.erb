@@ -16,19 +16,41 @@
     <%= f.text_field :name %>
   </div>
   <div class="field">
-    <%= f.label :company %><br />
+    <%= f.label :founder %><br />
+    <%= text_field_tag :founder_name, @project.founder.name %>
+  </div>
+  <div class="field">
+    <%= f.label "Company (optional):" %><br />
     <%= f.text_field :company %>
   </div>
   <div class="field">
-    <%= f.label :description %><br />
+    <%= f.label "Description of Project:" %><br />
     <%= f.text_area :description %>
   </div>
   <div class="field">
-    <%= f.label :price %><br />
-    <%= f.text_field :price %>
+    <%= f.label "Pricing:" %><br />
+    <select name="project[price]"> 
+      <option <% if @project.price == "Stock Options"%> selected="selected" <% end %> value="Stock Options"> Stock Options </option>
+      <option <% if @project.price == "$15-$40/hour"%> 
+         selected="selected" <% end %>value="$15-$40/hour"> $15-$40/hour </option>
+      <option <% if @project.price == "$40-$60/hour"%> 
+         selected="selected" <% end %>
+      value="$40-$60/hour"> $40-$60/hour </option>
+      <option <% if @project.price == "$60-$90/hour"%> 
+         selected="selected" <% end %> value="$60-$90/hour"> $60-$90/hour </option>
+      <option <% if @project.price == "$90+/hour"%> 
+         selected="selected" <% end %>value="$90+/hour"> $90+/hour </option>
+    </select> 
   </div>
   <div class="field">
-    <%= f.label :git_link %><br />
+    <%= f.label "Languages:" %><br />
+    <%= text_field_tag :language_name, @project.languages[0].name %>
+    <%= text_field_tag :language_name1, @project.languages[1].name %>
+    <%= text_field_tag :language_name2, @project.languages[2].name %>
+    <%= text_field_tag :language_name3, @project.languages[3].name %>
+  </div>
+  <div class="field">
+    <%= f.label "GitHub Link:" %><br />
     <%= f.text_field :git_link %>
   </div>
   <div class="actions">

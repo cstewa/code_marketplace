@@ -6,6 +6,11 @@ gem 'rails', '3.2.13'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem 'pg'
+gem 'pry-rails'
+gem 'pry-debugger'
+gem 'better_errors'
+gem 'binding_of_caller'
+gem 'meta_request'
 
 
 # Gems used only for assets and not required
@@ -21,6 +26,8 @@ group :assets do
 end
 
 gem 'jquery-rails'
+
+gem 'bcrypt-ruby', '~> 3.0.0'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

@@ -1,6 +1,11 @@
-<h1>Editing founder</h1>
+<h1>Edit Your Profile</h1>
 
 <%= render 'form' %>
 
-<%= link_to 'Show', @founder %> |
+<%= link_to 'View Your Profile', @founder %> 
+<%= link_to 'Delete Account', @founder, method: :delete, data: { confirm: 'Are you sure you want to delete your account forever??' } %>
+</br>
+
+<!-- Only if admin:
+ -->
 <%= link_to 'Back', founders_path %>

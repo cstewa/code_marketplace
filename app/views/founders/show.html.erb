@@ -1,17 +1,20 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <b>Name:</b>
-  <%= @founder.name %>
-</p>
+<!-- if founder show this:-->
+<h1> My Profile </h1> <%= link_to 'Edit Profile', edit_founder_path(@founder) %> 
 
+<!-- Make this go further down with CSS -->
+<h1> <%= @founder.name %> </h1>
+
+<% if !@founder.company.blank? %>
 <p>
-  <b>Company:</b>
+  <b>Company (or Company To Be):</b>
   <%= @founder.company %>
 </p>
+<% end %>
 
 <p>
-  <b>About:</b>
+  <b>About Me:</b>
   <%= @founder.about %>
 </p>
 
@@ -20,21 +23,60 @@
   <%= @founder.looking_for %>
 </p>
 
+<h3> Contact <%= @founder.name.split(" ")[0] %>! </h3>
 <p>
-  <b>Contact email:</b>
+  <b>Email:</b>
   <%= @founder.contact_email %>
-</p>
-
-<p>
-  <b>Contact phone:</b>
+  <b>Cell:</b>
   <%= @founder.contact_phone %>
-</p>
-
-<p>
-  <b>Contact linked in:</b>
+  <b>Linked In:</b>
   <%= @founder.contact_linked_in %>
 </p>
 
+<%= form_tag("/projects/new", :method => "get") do %>
+  <%= submit_tag("Create a Project") %> 
+<% end %>
 
-<%= link_to 'Edit', edit_founder_path(@founder) %> |
+</br>
+<!-- Others can see the view proj/dev-->
+<%= form_tag("/projects", :method => "get") do %>
+  <%= submit_tag("View All Projects") %> 
+<% end %>
+
+<%= form_tag("/developers", :method => "get") do %>
+  <%= submit_tag("View All Developers") %> 
+<% end %>
+
+<%= form_tag("/founders", :method => "get") do %>
+  <%= submit_tag("View All Founders") %> 
+<% end %>
+
+<% if !@founder.photo_url.blank? %>
+  <img src= <%=@founder.photo_url %> />
+<% end %>
+
+<!-- if logged in as founder -->
+<h2>My Projects:</h2> 
+
+<ul>
+    <%if !@founder.projects.blank? %> 
+      <% @projects.each do |project| %>
+        <li>  <%= link_to project, project_path(@founder.projects.find_by_name(project)) %> </li>
+        <% end %>
+    <% else %>
+      <p> You haven't started any projects. Click "Create a Project" to get started! </p>
+    <% end %>   
+</ul>
+
+<!-- if not founder (else) -->
+<%if !@founder.projects.blank? %> 
+  <h2> <%= @founder.name.split(" ")[0] %>'s Projects: </h2> <ul>
+  <% @projects.each do |project| %>
+  <li>  <%= link_to project, project_path(@founder.projects.find_by_name(project)) %> </li>
+  <% end %> </ul>
+<% end %>
+
+
+
+<!-- Only display back for admin! -->
 <%= link_to 'Back', founders_path %>

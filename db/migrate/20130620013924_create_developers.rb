@@ -8,6 +8,7 @@ class CreateDevelopers < ActiveRecord::Migration
       t.string :git_link
       t.string :contact_email
       t.integer :contact_phone
+      t.string :photo_url
 
       t.timestamps
     end

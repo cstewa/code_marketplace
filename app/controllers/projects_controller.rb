@@ -40,11 +40,21 @@ class ProjectsController < ApplicationController
   # POST /projects
   # POST /projects.json
   def create
+    @founder = Founder.find_or_create_by_name(params[:founder_name]) 
     @project = Project.new(params[:project])
 
     respond_to do |format|
-      if @project.save
-        format.html { redirect_to @project, notice: 'Project was successfully created.' }
+      if @project.save 
+        @founder.projects << @project 
+        @language = Language.find_or_create_by_name(params[:language_name])
+        @project.languages << @language
+        @language1 = Language.find_or_create_by_name(params[:language_name1])
+        @project.languages << @language1
+        @language2 = Language.find_or_create_by_name(params[:language_name2])
+        @project.languages << @language2
+        @language3 = Language.find_or_create_by_name(params[:language_name3])
+        @project.languages << @language3
+        format.html { redirect_to @project, notice: "Awesome! You created a project." }
         format.json { render json: @project, status: :created, location: @project }
       else
         format.html { render action: "new" }
@@ -60,7 +70,12 @@ class ProjectsController < ApplicationController
 
     respond_to do |format|
       if @project.update_attributes(params[:project])
-        format.html { redirect_to @project, notice: 'Project was successfully updated.' }
+        @project.languages[0].update_attribute(:name, params[:language_name]) 
+        @project.languages[1].update_attribute(:name, params[:language_name1]) 
+        @project.languages[2].update_attribute(:name, params[:language_name2]) 
+        @project.languages[3].update_attribute(:name, params[:language_name3]) 
+        @project.founder.update_attribute(:name, params[:founder_name])
+        format.html { redirect_to @project, notice: "Project updated :)" }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

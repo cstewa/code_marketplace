@@ -1,9 +1,10 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <b>Name:</b>
-  <%= @developer.name %>
-</p>
+<!-- If dev show this -->
+<h1> My Profile </h1> <%= link_to 'Edit Profile', edit_developer_path(@developer) %> 
+
+<!-- Make this go further down with CSS -->
+<h1> <%= @developer.name %> </h1>
 
 <p>
   <b>About:</b>
@@ -16,25 +17,84 @@
 </p>
 
 <p>
-  <b>Price:</b>
+  <b>Price Range:</b>
   <%= @developer.price %>
 </p>
 
+ <p>
+  <b>Languages:</b>
+  <% @developer.languages.each do |language| %>
+      <%= language.name %>
+      <% end %> 
+  </p>
+
 <p>
-  <b>Git link:</b>
+  <b>Link to GitHub Profile:</b>
   <%= @developer.git_link %>
 </p>
 
+<!-- Only if dev or admin -->
+<h4> Your contact information will only be accessible to people whose projects you have approved </h4>
+<h3> Contact <%= @developer.name.split(" ")[0] %>! </h3>
 <p>
-  <b>Contact email:</b>
+  <b>Email:</b>
   <%= @developer.contact_email %>
-</p>
-
-<p>
-  <b>Contact phone:</b>
+  <b>Cell:</b>
   <%= @developer.contact_phone %>
 </p>
 
+<%= form_tag("/projects", :method => "get") do %>
+  <%= submit_tag("View All Projects") %> 
+<% end %>
 
-<%= link_to 'Edit', edit_developer_path(@developer) %> |
+<%= form_tag("/founders", :method => "get") do %>
+  <%= submit_tag("View All Founders") %> 
+<% end %>
+
+<%= form_tag("/developers", :method => "get") do %>
+  <%= submit_tag("View All Developers") %> 
+<% end %>
+
+<% if !@developer.photo_url.blank? %>
+  <img src= <%=@developer.photo_url %> />
+<% end %>
+
+<!-- if founder -->
+<h2 id="founder_ask">Ask <%=@developer.name.split(" ")[0]%> to join a project! </h2>
+
+<%= select_tag(:pending_project, options_for_select([['Founders_proj_1', 'F_p_1'], ['F_p_2', 'fp2']]))%>
+<%= submit_tag("Submit project to #{@developer.name}") %> 
+
+<!-- # if logged in as dev
+ -->
+<div id="pending_projects"> 
+<h2>Pending Projects: </h2>
+<p class="pending_project"> </p>
+<!-- Each loop with all of this devs pending projects -->
+</div>
+
+
+
+<h2>Current Projects: </h2> 
+
+<ul>
+    <%if !@developer.projects.blank? %> 
+      <% @projects.each do |project| %>
+        <li>  <%= link_to project, project_path(@founder.projects.find_by_name(project)) %> </li>
+        <% end %>
+    <% else %>
+      <p> You haven't started any projects. Click "View All Projects" to join one! </p>
+    <% end %>   
+</ul>
+
+<!-- if not dev (else) -->
+<%if !@developer.projects.blank? %> 
+  <h2> <%= @developer.name.split(" ")[0] %>'s Projects: </h2> <ul>
+  <% @projects.each do |project| %>
+  <li>  <%= link_to project, project_path(@founder.projects.find_by_name(project)) %> </li>
+  <% end %> </ul>
+<% end %>
+
+
+<!-- only admin sees -->
 <%= link_to 'Back', developers_path %>

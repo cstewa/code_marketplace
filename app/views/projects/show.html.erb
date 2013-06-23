@@ -1,14 +1,19 @@
 <p id="notice"><%= notice %></p>
 
+
+<h1><%= @project.name %></h1>
+
 <p>
-  <b>Name:</b>
-  <%= @project.name %>
+  <b>Founder:</b>
+  <%=@project.founder.name %>
 </p>
 
+<% if !@project.company.blank? %>
 <p>
   <b>Company:</b>
   <%= @project.company %>
 </p>
+<% end %>
 
 <p>
   <b>Description:</b>
@@ -16,8 +21,15 @@
 </p>
 
 <p>
-  <b>Price:</b>
+  <b>Price Range:</b>
   <%= @project.price %>
+</p>
+
+<p>
+  <b>Languages:</b>
+  <% @project.languages.each do |language| %>
+      <%= language.name %>
+      <% end %> 
 </p>
 
 <p>
@@ -25,6 +37,23 @@
   <%= @project.git_link %>
 </p>
 
+<!--if developer -->
+<h2 id="developer_ask">Ask <%=@project.founder.name.split(" ")[0]%> to join this project! </h2>
 
-<%= link_to 'Edit', edit_project_path(@project) %> |
-<%= link_to 'Back', projects_path %>
+
+<h2>Developers who want to join this project: <h2>
+<ul>
+  <li> in controller: project.pending_developers.each do |x| puts x.name = pending_dev_names. figure out where you did this before [Accept] [Deny] </li>
+</ul>
+
+<h2>Developers collaborating on this project: <h2>
+  <p> <% @project.developers.each do |developer| %>
+      <%= developer.name %>
+      <%end%>
+
+<!-- Only edit if founder or admin -->
+
+<%= link_to 'Edit Project', edit_project_path(@project) %> |
+
+<!-- Anyone -->
+<%= link_to 'Back to All Projects', projects_path %>

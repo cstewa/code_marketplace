@@ -14,6 +14,10 @@ class FoundersController < ApplicationController
   # GET /founders/1.json
   def show
     @founder = Founder.find(params[:id])
+    if !@founder.projects.blank?
+      @projects = @founder.projects.map { |project| project.name }
+
+    end
 
     respond_to do |format|
       format.html # show.html.erb
@@ -44,7 +48,7 @@ class FoundersController < ApplicationController
 
     respond_to do |format|
       if @founder.save
-        format.html { redirect_to @founder, notice: 'Founder was successfully created.' }
+        format.html { redirect_to @founder, notice: "Woo! You're an official user." }
         format.json { render json: @founder, status: :created, location: @founder }
       else
         format.html { render action: "new" }
@@ -60,7 +64,7 @@ class FoundersController < ApplicationController
 
     respond_to do |format|
       if @founder.update_attributes(params[:founder])
-        format.html { redirect_to @founder, notice: 'Founder was successfully updated.' }
+        format.html { redirect_to @founder, notice: "Profile updated :)" }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

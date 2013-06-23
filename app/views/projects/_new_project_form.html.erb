@@ -1,0 +1,54 @@
+<%= form_for(@project) do |f| %>
+  <% if @project.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@project.errors.count, "error") %> prohibited this project from being saved:</h2>
+
+      <ul>
+      <% @project.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :founder %><br />
+    <%= text_field_tag :founder_name %>
+  </div>
+  <div class="field">
+    <%= f.label "Company (optional):" %><br />
+    <%= f.text_field :company %>
+  </div>
+  <div class="field">
+    <%= f.label "Description of Project:" %><br />
+    <%= f.text_area :description %>
+  </div>
+  <div class="field">
+    <%= f.label "Pricing:" %><br />
+    <select name="project[price]" > 
+      <option value="stock_options"> Stock Options </option>
+      <option value="$15-$40/hour"> $15-$40/hour </option>
+      <option value="$40-$60/hour"> $40-$60/hour </option>
+      <option value="$60-$90/hour"> $60-$90/hour </option>
+      <option value="$90+/hour"> $90+/hour </option>
+    </select> 
+  </div>
+  <div class="field">
+    <%= f.label "Languages:" %><br />
+    <%= text_field_tag :language_name %>
+    <%= text_field_tag :language_name1 %>
+    <%= text_field_tag :language_name2 %>
+    <%= text_field_tag :language_name3 %>
+  </div>
+  <div class="field">
+    <%= f.label "GitHub Link:" %><br />
+    <%= f.text_field :git_link %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

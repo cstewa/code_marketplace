@@ -15,6 +15,18 @@
     <%= f.label "Name (first and last):" %><br />
     <%= f.text_field :name %>
   </div>
+   <div class="field">
+    <%= f.label "Email (this will be your username):" %><br />
+    <%= f.text_field :email %>
+  </div>
+  <div class="field">
+    <%= f.label :password %><br />
+    <%= f.password_field :password %>
+  </div>
+   <div class="field">
+    <%= f.label :password_confirmation %><br />
+    <%= f.password_field :password_confirmation %>
+  </div>
   <div class="field">
     <%= f.label "About Me:" %><br />
     <%= f.text_area :about %>
@@ -25,25 +37,20 @@
   </div>
   <div class="field">
     <%= f.label "Pricing:" %><br />
-    <select name="developer[price]"> 
-      <option <% if @developer.price == "Stock Options"%> selected="selected" <% end %> value="Stock Options"> Stock Options </option>
-      <option <% if @developer.price == "$15-$40/hour"%> 
-         selected="selected" <% end %>value="$15-$40/hour"> $15-$40/hour </option>
-      <option <% if @developer.price == "$40-$60/hour"%> 
-         selected="selected" <% end %>
-      value="$40-$60/hour"> $40-$60/hour </option>
-      <option <% if @developer.price == "$60-$90/hour"%> 
-         selected="selected" <% end %> value="$60-$90/hour"> $60-$90/hour </option>
-      <option <% if @developer.price == "$90+/hour"%> 
-         selected="selected" <% end %>value="$90+/hour"> $90+/hour </option>
+    <select name="developer[price]" > 
+      <option value="Stock Options"> Stock Options </option>
+      <option value="$15-$40/hour"> $15-$40/hour </option>
+      <option value="$40-$60/hour"> $40-$60/hour </option>
+      <option value="$60-$90/hour"> $60-$90/hour </option>
+      <option value="$90+/hour"> $90+/hour </option>
     </select> 
   </div>
   <div class="field">
     <%= f.label "Languages:" %><br />
-    <%= text_field_tag :language_name, @developer.languages[0].name %>
-    <%= text_field_tag :language_name1, @developer.languages[1].name %>
-    <%= text_field_tag :language_name2, @developer.languages[2].name %>
-    <%= text_field_tag :language_name3, @developer.languages[3].name %>
+    <%= text_field_tag :language_name %>
+    <%= text_field_tag :language_name1 %>
+    <%= text_field_tag :language_name2 %>
+    <%= text_field_tag :language_name3 %>
   </div>
   <div class="field">
     <%= f.label "Link to GitHub Profile:" %><br />
@@ -65,4 +72,3 @@
     <%= f.submit "Save" %>
   </div>
 <% end %>
-

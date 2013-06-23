@@ -44,7 +44,15 @@ class DevelopersController < ApplicationController
 
     respond_to do |format|
       if @developer.save
-        format.html { redirect_to @developer, notice: 'Developer was successfully created.' }
+        @language = Language.find_or_create_by_name(params[:language_name])
+        @developer.languages << @language
+        @language1 = Language.find_or_create_by_name(params[:language_name1])
+        @developer.languages << @language1
+        @language2 = Language.find_or_create_by_name(params[:language_name2])
+        @developer.languages << @language2
+        @language3 = Language.find_or_create_by_name(params[:language_name3])
+        @developer.languages << @language3
+        format.html { redirect_to @developer, notice: "Woo! You're an official user." }
         format.json { render json: @developer, status: :created, location: @developer }
       else
         format.html { render action: "new" }
@@ -60,7 +68,11 @@ class DevelopersController < ApplicationController
 
     respond_to do |format|
       if @developer.update_attributes(params[:developer])
-        format.html { redirect_to @developer, notice: 'Developer was successfully updated.' }
+        @developer.languages[0].update_attribute(:name, params[:language_name]) 
+        @developer.languages[1].update_attribute(:name, params[:language_name1]) 
+        @developer.languages[2].update_attribute(:name, params[:language_name2]) 
+        @developer.languages[3].update_attribute(:name, params[:language_name3]) 
+        format.html { redirect_to @developer, notice: 'Profile updated :)' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

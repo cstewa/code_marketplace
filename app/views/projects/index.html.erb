@@ -1,31 +1,35 @@
-<h1>Listing projects</h1>
 
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Company</th>
-    <th>Description</th>
-    <th>Price</th>
-    <th>Git link</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+<!-- If logged in as founder, show theirs. If dev, theirs. Plus admin-->
+ <h1>Your Projects: </h1>
+
+<!-- Only founders and admins -->
+<%= link_to 'Create Another Project', new_project_path %>
+
+<!-- Everyone sees this: --> 
+<h1>All Projects:</h1>
 
 <% @projects.each do |project| %>
-  <tr>
-    <td><%= project.name %></td>
-    <td><%= project.company %></td>
-    <td><%= project.description %></td>
-    <td><%= project.price %></td>
-    <td><%= project.git_link %></td>
-    <td><%= link_to 'Show', project %></td>
-    <td><%= link_to 'Edit', edit_project_path(project) %></td>
-    <td><%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
+  <ul>
+    <li><%= link_to project.name, project %></li>
+    <li> Founder: <%= link_to project.founder.name, founder_path(project.founder.id) if !project.founder.nil? %> </li>
+    <% if !project.company.blank? %> <li>Company: <%= project.company %></li> <% end %>
+    <li>Description: <%= project.description %></li>
+    <li>Price: <%= project.price %></li>
+    <li>GitHub Link: <%= project.git_link %></li>
+    <li>Languages: <% project.languages.each do |language| %>
+        <%= language.name %>
+        <% end %>
+    </li>
+<!-- ONLY ADMIN. Edit and delete appear for founders ONLY at their projects on the top -->    
+    <li><%= link_to 'Edit', edit_project_path(project) %></li>
+    <li><%= link_to 'Delete', project, method: :delete, data: { confirm: 'Are you sure?' } %></li>
+  </ul>
 <% end %>
-</table>
 
 <br />
 
-<%= link_to 'New Project', new_project_path %>
+<!-- Only show if founder doesnt have projects or admin-->
+<%= link_to 'Create Your Own Project', new_project_path %>
+
+
+

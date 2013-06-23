@@ -1,6 +1,13 @@
-<h1>Editing developer</h1>
+<h1>Edit My Profile:</h1>
 
 <%= render 'form' %>
 
-<%= link_to 'Show', @developer %> |
-<%= link_to 'Back', developers_path %>
+ <%= link_to 'Delete Account', @developer, method: :delete, data: { confirm: 'Are you sure you want to delete your account forever??' } %>
+</br>
+
+<!-- only for admins
+ -->
+
+<%= link_to 'Show This Developer', @developer %> |
+<%= link_to 'Back to All Developers', developers_path %>
+
