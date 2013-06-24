@@ -8,6 +8,18 @@
     <%= form_tag("/update_developer/#{@project.id}", :method => "post") do %>
     <%= submit_tag("Accept this project") %>
   <% end %>
+
+  <%= hidden_field_tag "developer_denying_project", current_developer %>
+    <%= form_tag("/developer_deny/#{@project.id}", :method => "post") do %>
+    <%= submit_tag("Deny this project") %>
+  <% end %>
+
+<% elsif current_developer %>
+    <%= hidden_field_tag "developer_wants_project", current_developer %>
+    <%= form_tag("/developer_request/#{@project.id}", :method => "post") do %>
+    <%= submit_tag("Request to join this project") %>
+  <% end %>
+
 <% end %>
 
 <p>
@@ -45,9 +57,24 @@
 </p>
 
 
-<h2>Developers who want to join this project: <h2>
+<h2>Developers who want to join this project: </h2>
 <ul>
-  <li> in controller: project.pending_developers.each do |x| puts x.name = pending_dev_names. figure out where you did this before [Accept] [Deny] </li>
+<% if !@project.pending_developers.blank? %>
+
+  <li><% @project.pending_developers.each do |developer| %>
+
+    <%= link_to developer.name, developer_path(developer) %>  
+
+    <% if current_founder && !current_founder.projects.find_by_name(@project.name).nil? %> 
+      <%= form_tag("/accept_developer/#{developer.id}", :method => "post") do %>
+      <input type="hidden" name="project_name" value="<%= @project.name %>">
+      <%= submit_tag("Accept #{developer.name} for this project") %>
+      <% end %>
+    <% end %> 
+
+  <% end %> </li>
+
+<% end %>
 </ul>
 
 <h2>Developers collaborating on this project: <h2>

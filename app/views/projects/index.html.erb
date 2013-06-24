@@ -18,6 +18,26 @@
  </ul>
  <% end %>
 
+ <% if current_developer && !current_developer.projects.nil? %>
+ <h1>Your Projects: </h1>
+ <ul> <% current_developer.projects.each do |project| %>
+    <li><%= link_to project.name, project %></li>
+    <% if !project.company.blank? %> <li>Company: <%= project.company %></li> <% end %>
+    <li>Description: <%= project.description %></li>
+    <li>Price: <%= project.price %></li>
+    <li>GitHub Link: <%= project.git_link %></li>
+    <li>Languages: <% project.languages.each do |language| %>
+        <%= language.name %>
+        <% end %>
+    </li>
+    <li>Developers: <% project.developers. each do |developer| %>
+        <%= developer.name  %> 
+        <% end %>
+    </li>
+    <% end %>
+ </ul>
+ <% end %>
+
 <!-- Only founders AND ADMINS NEED TO ADD -->
 <% if current_founder %>
 <%= link_to 'Create Another Project', new_project_path %>
@@ -36,6 +56,10 @@
     <li>GitHub Link: <%= project.git_link %></li>
     <li>Languages: <% project.languages.each do |language| %>
         <%= language.name %>
+        <% end %>
+    </li>
+    <li>Developers: <% project.developers. each do |developer| %>
+        <%= developer.name  %> 
         <% end %>
     </li>
 <!-- ONLY ADMIN. Edit and delete appear for founders ONLY at their projects on the top -->    

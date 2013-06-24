@@ -91,6 +91,21 @@ class ProjectsController < ApplicationController
     redirect_to @project  
   end 
 
+  def developer_deny
+    @project = Project.find(params[:id])
+    @pending_to_delete = PendingProject.where(:developer_id => current_developer.id, :name => @project.name)
+    @pending_to_delete.destroy_all
+    redirect_to @project  
+  end 
+
+  def developer_request
+    @project = Project.find(params[:id])
+    @pending_project = PendingProject.create(:developer_id => current_developer.id, :name => @project.name)
+    @pending_developer = PendingDeveloper.create(:name => current_developer.name, :project_id => @project.id)
+    redirect_to @project  
+  end
+
+
   # DELETE /projects/1
   # DELETE /projects/1.json
   def destroy

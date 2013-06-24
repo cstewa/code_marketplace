@@ -15,8 +15,13 @@ Codeideas::Application.routes.draw do
 
   post "/update_developer/:id" => "projects#update_developer"
 
+  post "/developer_deny/:id" => "projects#developer_deny"
 
-  resources :developers
+  post "/developer_request/:id" => "projects#developer_request"
+
+  post "/accept_developer/:id" => "developers#accept_developer"
+
+  resources :developers, :except => [:update]
 
 
   resources :founders

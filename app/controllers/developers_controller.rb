@@ -82,6 +82,18 @@ class DevelopersController < ApplicationController
     end
   end
 
+   def accept_developer
+    @developer = Developer.find(params[:id])
+    @project_name = params[:project_name]
+    @project = Project.find_by_name(@project_name)
+    @project.developers << @developer
+    @pending_proj_to_delete = PendingProject.where(:developer_id => @developer.id, :name => @project.name)
+    @pending_proj_to_delete.destroy_all
+    @pending_developer = PendingDeveloper.where(:name => @developer.name, :project_id => @project.id)
+    @pending_developer.destroy_all
+    redirect_to @project  
+  end
+
   # DELETE /developers/1
   # DELETE /developers/1.json
   def destroy

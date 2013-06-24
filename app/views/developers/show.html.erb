@@ -36,7 +36,8 @@
 
 <!-- Only if dev or admin -->
 <% if current_developer && current_developer.name == @developer.name %>
-<h4> Your contact information will only be accessible to people whose projects you have approved </h4>
+
+<h4> Your contact information will only be accessible to people whose projects you're collaborating on.</h4>
 <h3> Contact <%= @developer.name.split(" ")[0] %>! </h3>
 <p>
   <b>Email:</b>
@@ -114,7 +115,7 @@
 
 <% end %>
 <!-- only admin sees -->
-<%= link_to 'Back', developers_path %>
+<%= link_to 'Back to Developers', developers_path %>
 
 
 
