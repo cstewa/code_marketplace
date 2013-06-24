@@ -1,7 +1,8 @@
 <p id="notice"><%= notice %></p>
 
-<!-- If dev show this -->
+<% if current_developer && current_developer.name == @developer.name %>
 <h1> My Profile </h1> <%= link_to 'Edit Profile', edit_developer_path(@developer) %> 
+<% end %>
 
 <!-- Make this go further down with CSS -->
 <h1> <%= @developer.name %> </h1>
@@ -34,6 +35,7 @@
 </p>
 
 <!-- Only if dev or admin -->
+<% if current_developer && current_developer.name == @developer.name %>
 <h4> Your contact information will only be accessible to people whose projects you have approved </h4>
 <h3> Contact <%= @developer.name.split(" ")[0] %>! </h3>
 <p>
@@ -42,6 +44,7 @@
   <b>Cell:</b>
   <%= @developer.contact_phone %>
 </p>
+<% end %>
 
 <%= form_tag("/projects", :method => "get") do %>
   <%= submit_tag("View All Projects") %> 
@@ -88,10 +91,11 @@
 
 <h2>Current Projects: </h2> 
 
+<% if current_developer && current_developer.name == @developer.name %>
 <ul>
     <%if !@developer.projects.blank? %> 
-      <% @projects.each do |project| %>
-        <li>  <%= link_to project, project_path(@founder.projects.find_by_name(project)) %> </li>
+      <% @developer.projects.each do |project| %>
+        <li>  <%= link_to project.name, project_path(project) %> </li>
         <% end %>
     <% else %>
       <p> You haven't started any projects. Click "View All Projects" to join one! </p>
@@ -99,14 +103,16 @@
 </ul>
 
 <!-- if not dev (else) -->
+<% elsif %>
+
 <%if !@developer.projects.blank? %> 
   <h2> <%= @developer.name.split(" ")[0] %>'s Projects: </h2> <ul> 
-  <% @projects.each do |project| %>
-  <%= link_to project, project_path(@founder.projects.find_by_name(project))  %> 
+  <% @developer.projects.each do |project| %>
+  <%= link_to project.name, project_path(project)  %> 
   <% end %>  </ul> 
 <% end %>
 
-
+<% end %>
 <!-- only admin sees -->
 <%= link_to 'Back', developers_path %>
 

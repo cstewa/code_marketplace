@@ -4,7 +4,8 @@
 <h1><%= @project.name %></h1>
 
 <% if current_developer && !PendingProject.where(:developer_id => current_developer.id, :name => @project.name).blank? %>  
-    <%= form_tag("/projects/#{@project.id}", :method => "put") do %>
+    <%= hidden_field_tag "developer_on_project", current_developer %>
+    <%= form_tag("/update_developer/#{@project.id}", :method => "post") do %>
     <%= submit_tag("Accept this project") %>
   <% end %>
 <% end %>
@@ -42,8 +43,6 @@
   <b>Git link:</b>
   <%= @project.git_link %>
 </p>
-
-<!--if developer -->
 
 
 <h2>Developers who want to join this project: <h2>

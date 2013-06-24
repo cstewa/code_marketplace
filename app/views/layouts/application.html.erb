@@ -12,7 +12,7 @@
 	Logged in as: <%=link_to current_founder.name, founder_path(current_founder.id) %> 
 	<%= link_to "Log out", sessions_destroy_path, :method => "delete" %> 
 <% elsif current_developer %>
-	Logged in as: <%= current_developer.name %> 
+	Logged in as: <%=link_to current_developer.name, developer_path(current_developer.id) %> 
 	<%= link_to "Log out", sessions_destroy_path, :method => "delete" %> 
 <% else %>
 	<%= link_to "Sign up as a Founder", new_founder_path %> |

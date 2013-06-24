@@ -13,6 +13,9 @@ Codeideas::Application.routes.draw do
 
   delete "sessions/destroy"
 
+  post "/update_developer/:id" => "projects#update_developer"
+
+
   resources :developers
 
 
