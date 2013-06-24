@@ -29,10 +29,9 @@
     <td><%= developer.contact_email %></td>
     <td><%= developer.contact_phone %></td>
     <td> <% if !developer.photo_url.blank? %><img src= <%=developer.photo_url %>/> <% end %> </td>
-    <!-- Only if the right dev -->
-    <td><%= link_to 'Edit My Profile', edit_developer_path(developer) %></td>
-    <!-- If founder -->
+    <% if current_founder %>
     <td><%= link_to 'Reach out to this developer!', developer_path(developer)%></td> 
+    <% end %>
     <!-- If admin -->
     <td><%= link_to 'Edit', edit_developer_path(developer) %></td>
     <td><%= link_to 'Delete', developer, method: :delete, data: { confirm: 'Are you sure?' } %></td>

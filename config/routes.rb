@@ -1,4 +1,10 @@
 Codeideas::Application.routes.draw do
+  post "pending_projects/create"
+
+  get "pending_projects/destroy"
+
+  get "pending_projects/show"
+
   get "sessions/new"
 
   get "sessions/show"

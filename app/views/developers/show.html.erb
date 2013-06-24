@@ -59,20 +59,26 @@
   <img src= <%=@developer.photo_url %> />
 <% end %>
 
-<!-- if founder -->
+<% if current_founder && !current_founder.projects.nil? %>
 <h2 id="founder_ask">Ask <%=@developer.name.split(" ")[0]%> to join a project! </h2>
 
-<%= select_tag(:pending_project, options_for_select([['Founders_proj_1', 'F_p_1'], ['F_p_2', 'fp2']]))%>
-<%= submit_tag("Submit project to #{@developer.name}") %> 
+<%= form_tag("/pending_projects/create", :method => "post") do %>
+  <%= select_tag "name", options_from_collection_for_select(current_founder.projects, "name", "name")%>
+  <%= hidden_field_tag "developer_id", @developer.id %>
+  <%= submit_tag "Submit project to #{@developer.name.split(" ")[0]}" %> 
+<% end %>
+<% end %>
 
-<!-- # if logged in as dev
- -->
+
+
 <div id="pending_projects"> 
 <h2>Pending Projects: </h2>
 <p class="pending_project"> </p>
 <!-- Each loop with all of this devs pending projects -->
 </div>
 
+<!-- Devs can edit or delete these!!!
+ -->
 
 
 <h2>Current Projects: </h2> 
@@ -98,5 +104,7 @@
 
 <!-- only admin sees -->
 <%= link_to 'Back', developers_path %>
+
+
 
 

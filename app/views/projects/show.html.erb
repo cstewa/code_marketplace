@@ -5,7 +5,7 @@
 
 <p>
   <b>Founder:</b>
-  <%=@project.founder.name %>
+  <%= link_to @project.founder.name, founder_path(@project.founder) %>
 </p>
 
 <% if !@project.company.blank? %>
@@ -51,9 +51,12 @@
       <%= developer.name %>
       <%end%>
 
-<!-- Only edit if founder or admin -->
+<!-- if person viewing page is the founder of this project:-->
+<% if current_founder && current_founder.name == @project.founder.name %>
 
 <%= link_to 'Edit Project', edit_project_path(@project) %> |
+
+<% end %>
 
 <!-- Anyone -->
 <%= link_to 'Back to All Projects', projects_path %>

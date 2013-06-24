@@ -1,8 +1,9 @@
 <p id="notice"><%= notice %></p>
 
-
-<!-- if founder show this:-->
+<!-- If person viewing is same as person logged in:-->
+<% if current_founder && current_founder.name == @founder.name %>
 <h1> My Profile </h1> <%= link_to 'Edit Profile', edit_founder_path(@founder) %> 
+<% end %>
 
 
 <!-- Make this go further down with CSS -->
@@ -25,6 +26,9 @@
   <%= @founder.looking_for %>
 </p>
 
+<!-- If person viewing is same as person logged in:-->
+<% if current_founder && current_founder.name == @founder.name %>
+<em> Only the developers you approve for your projects will see your contact info below: </em>
 <h3> Contact <%= @founder.name.split(" ")[0] %>! </h3>
 <p>
   <b>Email:</b>
@@ -38,8 +42,10 @@
 <%= form_tag("/projects/new", :method => "get") do %>
   <%= submit_tag("Create a Project") %> 
 <% end %>
+<% end %>
 
 </br>
+
 <!-- Others can see the view proj/dev-->
 <%= form_tag("/projects", :method => "get") do %>
   <%= submit_tag("View All Projects") %> 
@@ -57,7 +63,7 @@
   <img src= <%=@founder.photo_url %> />
 <% end %>
 
-<!-- if logged in as founder -->
+<% if current_founder && current_founder.name == @founder.name %>
 <h2>My Projects:</h2> 
 
 <ul>
@@ -70,7 +76,9 @@
     <% end %>   
 </ul>
 
-<!-- if not founder (else) -->
+<!-- if you're not this founder founder (else) -->
+<% else %>
+
 <%if !@founder.projects.blank? %> 
   <h2> <%= @founder.name.split(" ")[0] %>'s Projects: </h2> <ul>
   <% @projects.each do |project| %>
@@ -78,7 +86,8 @@
   <% end %> </ul>
 <% end %>
 
+<% end %>
 
 
 <!-- Only display back for admin! -->
-<%= link_to 'Back', founders_path %>
+<%= link_to 'Back to All Founders', founders_path %>
