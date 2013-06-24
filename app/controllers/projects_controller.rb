@@ -67,7 +67,6 @@ class ProjectsController < ApplicationController
   # PUT /projects/1.json
   def update
     @project = Project.find(params[:id])
-
     respond_to do |format|
       if @project.update_attributes(params[:project])
         @project.languages[0].update_attribute(:name, params[:language_name]) 

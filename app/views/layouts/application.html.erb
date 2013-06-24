@@ -9,7 +9,7 @@
 <body>
 
 <% if current_founder %>
-	Logged in as: <%= current_founder.name %> 
+	Logged in as: <%=link_to current_founder.name, founder_path(current_founder.id) %> 
 	<%= link_to "Log out", sessions_destroy_path, :method => "delete" %> 
 <% elsif current_developer %>
 	Logged in as: <%= current_developer.name %> 
