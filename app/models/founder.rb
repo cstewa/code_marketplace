@@ -1,6 +1,9 @@
 class Founder < ActiveRecord::Base
-  has_secure_password
-  attr_accessible :about, :company, :contact_email, :contact_linked_in, :contact_phone, :looking_for, :name, :photo_url, :email, :password, :password_confirmation
-  has_many :projects
-  validates :email, :uniqueness => true
+  attr_accessible :linked_in
+
+  has_and_belongs_to_many :projects
+  has_and_belongs_to_many :tags
+  has_many :pending_developers
+  has_one :user, :as => :profile
+
 end

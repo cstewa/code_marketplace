@@ -1,72 +1,70 @@
-<%= form_for(@developer) do |f| %>
-  <% if @developer.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@developer.errors.count, "error") %> prohibited this developer from being saved:</h2>
-
-      <ul>
-      <% @developer.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+<%= form_for("developer", :url => developers_url, :method => "post") do |f| %>
 
   <div class="field">
-    <%= f.label "Name (first and last):" %><br />
+    <%= f.label "Name (first and last)" %><br />
     <%= f.text_field :name %>
   </div>
-   <div class="field">
-    <%= f.label "Username:" %><br />
+  <div class="field">
+    <%= f.label "Email (this will be your username):" %><br />
     <%= f.text_field :email %>
   </div>
   <div class="field">
     <%= f.label :password %><br />
     <%= f.password_field :password %>
   </div>
-  <div class="field">
+   <div class="field">
     <%= f.label :password_confirmation %><br />
     <%= f.password_field :password_confirmation %>
   </div>
   <div class="field">
-    <%= f.label "About Me:" %><br />
-    <%= f.text_area :about %>
+    <%= f.label "Company:" %><br/>
+    <em> Optional </em> <br />
+    <%= f.text_field :company %>
   </div>
   <div class="field">
-    <%= f.label "Looking For:" %><br />
+    <%= f.label "About Me:" %><br />
+    <%= f.text_area :about_me %>
+  </div>
+  <div class="field">
+    <%= f.label "Looking for a Founder or Projects like:" %><br />
     <%= f.text_area :looking_for %>
   </div>
   <div class="field">
-    <%= f.label "Pricing:" %><br />
-    <select name="developer[price]" > 
+    <%= label_tag "Pricing:" %><br />
+    <select name="price" >
       <option value="Stock Options"> Stock Options </option>
       <option value="$15-$40/hour"> $15-$40/hour </option>
       <option value="$40-$60/hour"> $40-$60/hour </option>
       <option value="$60-$90/hour"> $60-$90/hour </option>
       <option value="$90+/hour"> $90+/hour </option>
-    </select> 
+    </select>
   </div>
   <div class="field">
-    <%= f.label "Languages:" %><br />
+    <%= f.label "Cell:" %><br />
+    <%= f.number_field :phone %>
+  </div>
+  <div class="field">
+    <%= f.label "Link to a picture of you!" %><br />
+    <%= f.text_field :photo_url %>
+  </div>
+  <div class="field">
+    <%= label_tag "Languages:" %><br />
     <%= text_field_tag :language_name %>
     <%= text_field_tag :language_name1 %>
     <%= text_field_tag :language_name2 %>
     <%= text_field_tag :language_name3 %>
   </div>
   <div class="field">
-    <%= f.label "Link to GitHub Profile:" %><br />
-    <%= f.text_field :git_link %>
+    <%= label_tag "Github Profile:" %><br />
+    <%= text_field_tag :github %>
   </div>
   <div class="field">
-    <%= f.label "Email:" %><br />
-    <%= f.text_field :contact_email %>
+    <%= label_tag "Link to apps you've built (seperate with comma if more than one link):" %><br />
+    <%= text_field_tag :heroku %>
   </div>
-  <div class="field">
-    <%= f.label "Cell:" %><br />
-    <%= f.number_field :contact_phone %>
-  </div>
-  <div class="field">
-    <%= f.label "Photo URL" %><br />
-    <%= f.text_field :photo_url %>
+   <div class="field">
+    <%= label_tag "Your Website:" %><br />
+    <%= text_field_tag :website %>
   </div>
   <div class="actions">
     <%= f.submit "Save" %>

@@ -1,4 +1,14 @@
 Codeideas::Application.routes.draw do
+  get "users/new"
+
+  get "users/edit"
+
+  get "users/create"
+
+  get "users/update"
+
+  get "users/destroy"
+
   post "pending_projects/create"
 
   get "pending_projects/destroy"

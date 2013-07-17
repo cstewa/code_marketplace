@@ -6,6 +6,7 @@ class CreateProjects < ActiveRecord::Migration
       t.text :description
       t.string :price
       t.string :git_link
+      t.text :status
 
       t.timestamps
     end

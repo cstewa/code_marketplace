@@ -1,4 +1,4 @@
-class ApplicationController < ActionController::Base 
+class ApplicationController < ActionController::Base
   protect_from_forgery
 
  def current_founder 
@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
 
  helper_method :current_founder
 
-def current_developer 
+def current_developer
   if session[:user_name]
     @current_developer = Developer.find_by_name(session[:user_name]) if Developer.find_by_name(session[:user_name]) != nil
   end

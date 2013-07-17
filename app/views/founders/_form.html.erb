@@ -1,22 +1,11 @@
-<%= form_for(@founder) do |f| %>
-  <% if @founder.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@founder.errors.count, "error") %> prohibited this founder from being saved:</h2>
-
-      <ul>
-      <% @founder.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+<%= form_for("founder", :url => founders_url, :method => "post") do |f| %>
 
   <div class="field">
     <%= f.label "Name (first and last)" %><br />
     <%= f.text_field :name %>
   </div>
   <div class="field">
-    <%= f.label "Username:" %><br />
+    <%= f.label "Email (this will be your usernmae):" %><br />
     <%= f.text_field :email %>
   </div>
   <div class="field">
@@ -34,23 +23,23 @@
   </div>
   <div class="field">
     <%= f.label "About Me:" %><br />
-    <%= f.text_area :about %>
+    <%= f.text_area :about_me %>
   </div>
   <div class="field">
     <%= f.label "Looking for a Developer who:" %><br />
     <%= f.text_area :looking_for %>
   </div>
   <div class="field">
-    <%= f.label "Email:" %><br />
-    <%= f.text_field :contact_email %>
-  </div>
-  <div class="field">
     <%= f.label "Cell:" %><br />
-    <%= f.number_field :contact_phone %>
+    <%= f.number_field :phone %>
   </div>
   <div class="field">
-    <%= f.label "Linked In URL:" %><br />
-    <%= f.text_field :contact_linked_in %>
+    <%= f.label "Link to a picture of you!" %><br />
+    <%= f.text_field :photo_url %>
+  </div>
+  <div class="field">
+    <%= label_tag :linked_in %><br />
+    <%= text_field_tag :linked_in %>
   </div>
   <div class="actions">
     <%= f.submit "Save" %>

@@ -27,11 +27,8 @@ class FoundersController < ApplicationController
   # GET /founders/new
   # GET /founders/new.json
   def new
-    @founder = Founder.new
-
     respond_to do |format|
       format.html # new.html.erb
-      format.json { render json: @founder }
     end
   end
 
@@ -43,16 +40,16 @@ class FoundersController < ApplicationController
   # POST /founders
   # POST /founders.json
   def create
-    @founder = Founder.new(params[:founder])
+    @founder = Founder.new
+    @founder.user = User.new(params[:founder])
+    @founder.linked_in = params[:linked_in]
 
     respond_to do |format|
       if @founder.save
-        session[:user_name] = @founder.name
+        # session[:user_name] = @founder.user.name
         format.html { redirect_to @founder, notice: "Woo! You're an official user." }
-        format.json { render json: @founder, status: :created, location: @founder }
       else
         format.html { render action: "new" }
-        format.json { render json: @founder.errors, status: :unprocessable_entity }
       end
     end
   end

@@ -24,11 +24,8 @@ class DevelopersController < ApplicationController
   # GET /developers/new
   # GET /developers/new.json
   def new
-    @developer = Developer.new
-
     respond_to do |format|
       format.html # new.html.erb
-      format.json { render json: @developer }
     end
   end
 
@@ -40,10 +37,12 @@ class DevelopersController < ApplicationController
   # POST /developers
   # POST /developers.json
   def create
-    @developer = Developer.new(params[:developer])
+    @developer = Developer.new
+    @developer.user = User.new(params[:developer])
 
     respond_to do |format|
       if @developer.save
+        @developer.update_attributes(:price => params[:price], :heroku => params[:heroku], :website => params[:website], :github => params[:github])
         @language = Language.find_or_create_by_name(params[:language_name])
         @developer.languages << @language
         @language1 = Language.find_or_create_by_name(params[:language_name1])
@@ -52,12 +51,10 @@ class DevelopersController < ApplicationController
         @developer.languages << @language2
         @language3 = Language.find_or_create_by_name(params[:language_name3])
         @developer.languages << @language3
-        session[:user_name] = @developer.name
+        # session[:user_name] = @developer.name
         format.html { redirect_to @developer, notice: "Woo! You're an official user." }
-        format.json { render json: @developer, status: :created, location: @developer }
       else
         format.html { render action: "new" }
-        format.json { render json: @developer.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -69,10 +66,10 @@ class DevelopersController < ApplicationController
 
     respond_to do |format|
       if @developer.update_attributes(params[:developer])
-        @developer.languages[0].update_attribute(:name, params[:language_name]) 
-        @developer.languages[1].update_attribute(:name, params[:language_name1]) 
-        @developer.languages[2].update_attribute(:name, params[:language_name2]) 
-        @developer.languages[3].update_attribute(:name, params[:language_name3]) 
+        @developer.languages[0].update_attribute(:name, params[:language_name])
+        @developer.languages[1].update_attribute(:name, params[:language_name1])
+        @developer.languages[2].update_attribute(:name, params[:language_name2])
+        @developer.languages[3].update_attribute(:name, params[:language_name3])
         format.html { redirect_to @developer, notice: 'Profile updated :)' }
         format.json { head :no_content }
       else
@@ -91,7 +88,7 @@ class DevelopersController < ApplicationController
     @pending_proj_to_delete.destroy_all
     @pending_developer = PendingDeveloper.where(:name => @developer.name, :project_id => @project.id)
     @pending_developer.destroy_all
-    redirect_to @project  
+    redirect_to @project
   end
 
   # DELETE /developers/1

@@ -1,7 +1,7 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
-  linked_in: MyString
+  name: MyString
 
 two:
-  linked_in: MyString
+  name: MyString
